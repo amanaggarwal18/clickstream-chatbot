@@ -317,19 +317,21 @@ def bar_chart(data: pd.DataFrame, kind: str) -> alt.LayerChart:
     return (bars + labels).properties(height=max(110, 44 * len(data))).configure_view(stroke=None)
 
 
-def column_chart(data: pd.DataFrame, x: str, y: str, y_title: str) -> alt.Chart:
-    """Vertical bars over an ordinal x so gaps in dates don't stretch the axis."""
-    return (
-        alt.Chart(data)
-        .mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4, color=palette()["top"])
-        .encode(
-            x=alt.X(f"{x}:N", sort=None, title=None, axis=alt.Axis(labelAngle=0, ticks=False)),
-            y=alt.Y(f"{y}:Q", title=y_title, axis=alt.Axis(grid=True, tickCount=4)),
-            tooltip=[alt.Tooltip(f"{x}:N", title="Day"), alt.Tooltip(f"{y}:Q", title=y_title, format=",")],
-        )
-        .properties(height=230)
-        .configure_view(stroke=None)
+def trend_chart(data: pd.DataFrame, x: str, y: str, y_title: str) -> alt.LayerChart:
+    """Daily bars on a time axis with a 7-day rolling average line on top."""
+    colors = palette()
+    data = data.assign(avg_7d=data[y].rolling(7, min_periods=1).mean().round(0))
+    base = alt.Chart(data).encode(x=alt.X(f"{x}:T", title=None, axis=alt.Axis(format="%b %-d", tickCount=6, grid=False)))
+    tooltip = [
+        alt.Tooltip(f"{x}:T", title="Day", format="%a, %b %-d"),
+        alt.Tooltip(f"{y}:Q", title=y_title, format=","),
+        alt.Tooltip("avg_7d:Q", title="7-day avg", format=","),
+    ]
+    bars = base.mark_bar(color=colors["bar"]).encode(
+        y=alt.Y(f"{y}:Q", title=y_title, axis=alt.Axis(grid=True, tickCount=4)), tooltip=tooltip
     )
+    line = base.mark_line(color=colors["top"], strokeWidth=2.5, interpolate="monotone").encode(y="avg_7d:Q", tooltip=tooltip)
+    return (bars + line).properties(height=230).configure_view(stroke=None)
 
 
 def render_chart(spec: dict | None, df: pd.DataFrame | None, key: str):
@@ -434,12 +436,12 @@ def render_overview(key: str):
 
     with daily_col.container(border=True, height="stretch"):
         st.markdown("**:material/calendar_month: Sessions per day**")
-        daily = d.assign(day=d["dt"].dt.strftime("%b %-d"))
         st.altair_chart(
-            column_chart(daily, "day", "total_sessions", "Sessions"),
-            key=f"daily_{key}", alt="Bar chart of sessions per tracked day",
+            trend_chart(d, "dt", "total_sessions", "Sessions"),
+            key=f"daily_{key}", alt="Daily sessions with a 7-day rolling average line",
         )
-        st.caption(f"{len(d)} tracked days · gaps in the calendar are skipped")
+        first, last = d["dt"].iloc[0], d["dt"].iloc[-1]
+        st.caption(f"{first:%b %-d} – {last:%b %-d, %Y} · {len(d)} days · line = 7-day average")
 
 
 @st.dialog("Data overview", width="large", icon=":material/dashboard:")
