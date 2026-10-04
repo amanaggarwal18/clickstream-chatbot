@@ -11,3 +11,6 @@ __pycache__/
 # Streamlit agent skills (environment-specific symlinks into .venv)
 .agents/skills/developing-with-streamlit
 .claude/skills/developing-with-streamlit
+
+# Scratch notebook (contains a hard-coded API key)
+test.ipynb
