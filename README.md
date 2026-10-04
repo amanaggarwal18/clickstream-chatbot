@@ -18,10 +18,10 @@ Ask questions about clickstream data in plain English. A Gemini model writes a r
 
 | Table | Grain | Rows | Highlights |
 |---|---|---|---|
-| `fact_sessions` | one row per session | 10,752 | user, start/end time, events, pages viewed, converted, duration |
-| `fact_daily_metrics` | one row per day | 13 | daily active users, sessions, funnel counts (page view → click → add to cart → purchase), conversion rate |
+| `fact_sessions` | one row per session | 71,849 | user, start/end time, events, pages viewed, converted, duration |
+| `fact_daily_metrics` | one row per day | 92 | daily active users, sessions, funnel counts (page view → click → add to cart → purchase), conversion rate |
 
-The data covers Aug 12 – Oct 2, 2026, with a gap between Aug 20 and Sep 29.
+The data covers Jul 1 – Sep 30, 2026 (92 consecutive days).
 
 ## Getting started
 
