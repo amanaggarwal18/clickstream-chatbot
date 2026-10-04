@@ -14,3 +14,6 @@ __pycache__/
 
 # Scratch notebook (contains a hard-coded API key)
 test.ipynb
+
+# macOS
+.DS_Store

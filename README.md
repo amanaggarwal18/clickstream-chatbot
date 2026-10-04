@@ -2,7 +2,7 @@
 
 Ask questions about clickstream data in plain English. A Gemini model writes a read-only DuckDB SQL query, the app runs it against a local database, and Streamlit shows the answer with a chart, the SQL, and the raw data.
 
-![Clickstream Analytics Agent start screen: KPI cards with sparklines, conversion funnel, sessions per day with a 7-day average, and starter questions](clickstream-app.png)
+![Demo: asking for a chart of daily active users in August 2026, the agent generates SQL, runs it, and answers with a line chart and the result table](clickstream-demo.gif)
 
 ## Features
 
