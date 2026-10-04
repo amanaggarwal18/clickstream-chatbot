@@ -1,0 +1,54 @@
+# Clickstream Analytics Agent theme: neutral base, indigo accent, light + dark.
+
+[theme]
+font = "'Inter':https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+codeFontSize = "0.85rem"
+baseFontSize = 15
+headingFontSizes = ["32px", "24px", "18px", "16px", "14px", "12px"]
+headingFontWeights = [700, 600, 600, 600, 600, 600]
+baseRadius = "10px"
+buttonRadius = "full"
+showWidgetBorder = true
+showSidebarBorder = true
+linkUnderline = false
+
+[theme.light]
+primaryColor = "#4F46E5"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F4F5FA"
+codeBackgroundColor = "#F4F5FA"
+textColor = "#111827"
+borderColor = "#E5E7EB"
+dataframeHeaderBackgroundColor = "#F4F5FA"
+chartCategoricalColors = ["#4F46E5", "#0EA5E9", "#10B981", "#F59E0B", "#EC4899", "#8B5CF6", "#64748B"]
+blueColor = "#4F46E5"
+greenColor = "#059669"
+redColor = "#DC2626"
+violetColor = "#7C3AED"
+grayColor = "#6B7280"
+
+[theme.light.sidebar]
+backgroundColor = "#F8F9FC"
+secondaryBackgroundColor = "#EEF0F7"
+borderColor = "#E5E7EB"
+
+[theme.dark]
+primaryColor = "#818CF8"
+backgroundColor = "#0B0D14"
+secondaryBackgroundColor = "#161A26"
+codeBackgroundColor = "#161A26"
+textColor = "#E5E7EB"
+borderColor = "#262B3B"
+dataframeHeaderBackgroundColor = "#161A26"
+chartCategoricalColors = ["#818CF8", "#38BDF8", "#34D399", "#FBBF24", "#F472B6", "#A78BFA", "#94A3B8"]
+blueColor = "#818CF8"
+greenColor = "#34D399"
+redColor = "#F87171"
+violetColor = "#A78BFA"
+grayColor = "#9CA3AF"
+
+[theme.dark.sidebar]
+backgroundColor = "#10131C"
+secondaryBackgroundColor = "#1B2030"
+borderColor = "#262B3B"
